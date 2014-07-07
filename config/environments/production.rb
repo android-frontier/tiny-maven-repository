@@ -79,4 +79,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+
+  unless ENV["ARTIFACT_ROOT_PATH"].present?
+    raise "No ARTIFACT_ROOT_PATH present"
+  end
+  config.artifact_root_path = Pathname.new(ENV["ARTIFACT_ROOT_PATH"])
 end

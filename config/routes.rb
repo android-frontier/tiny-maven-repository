@@ -13,12 +13,6 @@ Rails.application.routes.draw do
           constraints: {
               filename: /.+/,
           }
-    end
-  end
-
-  resources :release do # artifact download API
-    collection do
-      get '/*artifact_path/maven-metadata.xml', to: 'artifacts#metadata'
 
       get '/*artifact_path/:filename', to: 'artifacts#show',
           constraints: {
