@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'slim-rails'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'nokogiri'
 
 group :development do
   gem 'shotgun'
