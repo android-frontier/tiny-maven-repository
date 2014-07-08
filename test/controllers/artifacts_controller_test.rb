@@ -1,8 +1,30 @@
 require 'test_helper'
 
 class ArtifactsControllerTest < ActionController::TestCase
-  test 'get index' do
+  root = Rails.application.config.artifact_root_path
+
+  test 'GET /' do
     get :index
-    assert_response :success
+    assert { response.response_code == 200 }
+  end
+
+  test 'GET /artifacts/:artifact_path/:filename' do
+    FileUtils.mkdir_p(root.join('com/example'))
+    File.write(root.join('com/example/artifact.txt'), 'Hello, world!')
+
+    get :show, artifact_path: 'com/example', filename: 'artifact.txt'
+    assert { response.response_code == 200 }
+    assert { response.body == 'Hello, world!' }
+  end
+
+  test 'GET /artifacts/:artifact_path/:filename (not found)' do
+    get :show, artifact_path: 'com/example/not/found', filename: 'artifact.txt'
+    assert { response.response_code == 404 }
+  end
+
+  test 'PUT /artifacts/:artifact_path/:filename' do
+    put :publish, { artifact_path: 'com/example', filename: 'artifact.txt' }
+
+    assert { response.response_code == 200 }
   end
 end
