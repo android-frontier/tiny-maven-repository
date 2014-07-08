@@ -1,7 +1,8 @@
-h1 List of Artifacts
+.row
+  h1 List of Artifacts
 
-pre
-  = "dependencies {\n"
-  - @artifacts.each do |artifact|
-      = "  compile '#{artifact.as_dependency}'\n"
-  = "}\n"
+  pre
+    = "dependencies {\n"
+    - @artifacts.each do |artifact|
+        = "  compile '#{artifact.as_dependency}'\n"
+    = "}\n"
