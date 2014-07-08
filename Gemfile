@@ -1,9 +1,21 @@
 source 'https://rubygems.org'
 
-gem 'slim-rails'
-gem 'omniauth'
-gem 'omniauth-github'
-gem 'nokogiri'
+gem 'slim-rails', '~> 2.1.5'
+gem 'omniauth', '~> 1.2.1'
+gem 'omniauth-github', '~> 1.1.2'
+gem 'nokogiri', '~> 1.6.2.1'
+gem 'jbuilder', '~> 2.1.2'
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'rails', '~> 4.1.4'
+gem 'sass-rails', '~> 4.0.3'
+gem 'less-rails', '~> 2.5.0'
+gem 'uglifier', '~> 2.5.1'
+
+gem 'twitter-bootstrap-rails', '~> 2.2.8'
+gem 'execjs', '~> 2.2.1'
+gem 'therubyracer', '~> 0.12.1'
+gem 'jquery-rails', '~> 3.1.1'
 
 group :development do
   gem 'shotgun'
@@ -12,31 +24,17 @@ group :development do
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'sqlite3'
+
+  gem 'spring'
+end
+
+group :doc do
+  gem 'sdoc', '~> 0.4.0' # bundle exec doc:rails
 end
 
 group :test do
   gem 'minitest-power_assert'
 end
-
-gem 'rails', '4.1.4'
-gem 'sass-rails', '~> 4.0.3'
-gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .js.coffee assets and views
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
-
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
-
-# Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
 # gem 'unicorn'
