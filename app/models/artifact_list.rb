@@ -1,4 +1,6 @@
 class ArtifactList
+  include Enumerable
+
   def initialize(root_path = Rails.application.config.artifact_root_path)
     @root_path = root_path
 
