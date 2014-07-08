@@ -1,7 +1,7 @@
 class ArtifactsController < ApplicationController
 
   def index
-
+    @artifacts = ArtifactList.new
   end
 
   def show
