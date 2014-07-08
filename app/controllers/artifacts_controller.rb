@@ -5,10 +5,8 @@ class ArtifactsController < ApplicationController
   end
 
   def show
-    open_for_reading(artifact_path) do |ins|
-      send_file(ins)
-    end
-  rescue Errno::ENOENT
+    send_file(artifact_path)
+  rescue ActionController::MissingFile
     render text: "File Not Found\n", status: 404
   end
 
@@ -27,10 +25,6 @@ class ArtifactsController < ApplicationController
     artifact_path = params.require(:artifact_path)
     filename = params.require(:filename)
     Rails.application.config.artifact_root_path.join(artifact_path, filename)
-  end
-
-  def open_for_reading(path, &block)
-    File.open(path, "r", &block)
   end
 
   def open_for_writing(path, &block)
