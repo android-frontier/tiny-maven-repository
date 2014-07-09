@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'unicorn'
+
 gem 'slim-rails', '~> 2.1.5'
 gem 'omniauth', '~> 1.2.1'
 gem 'omniauth-github', '~> 1.1.2'
