@@ -2,6 +2,12 @@
   h1 List of Artifacts
 
   pre
+    | repositories {
+        maven { url '#{site_maven_repository_url}' }
+      }
+
+
+  pre
     = "dependencies {\n"
     - @artifacts.each do |artifact|
         = "  compile '#{artifact.as_dependency}'\n"

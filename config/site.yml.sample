@@ -1,0 +1,5 @@
+# site configuration
+
+name: Android Frontier
+url: http://android-frontier.org
+maven_repository_url: http://android-frontier.org/artifacts
