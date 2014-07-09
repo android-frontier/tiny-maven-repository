@@ -36,7 +36,4 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_controller.allow_forgery_protection = false # CSRF
-
-
-  config.artifact_root_path = Pathname.new(ENV["ARTIFACT_ROOT_PATH"] || Rails.root.join('tmp/artifacts'))
 end
