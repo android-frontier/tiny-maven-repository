@@ -14,7 +14,7 @@ class Artifact
   end
 
   def version
-    @metadata.css('metadata version').first.text
+    @metadata.css('metadata versioning versions version').last.text
   end
 
   def as_dependency
