@@ -3,13 +3,18 @@ Rails.application.routes.draw do
   # how to debug:
   # console> reload! ; Rails.application.routes.recognize_path '/release/com/android-frontier/foo/1.0.0/foo-1.0.0.jar', method: :get
 
-  root to: 'artifacts#index'
+  root to: 'top#index'
 
   # see http://docs.codehaus.org/display/MAVEN/Repository+Layout+-+Final
   # /$groupId[0]/../${groupId[n]/$artifactId/$version/$artifactId-$version.$extension
   resources :artifacts do # artifact upload API
     collection do
       put '/*artifact_path/:filename', to: 'artifacts#publish',
+          constraints: {
+              filename: /.+/,
+          }
+
+      get '/*artifact_path/', to: 'artifacts#index',
           constraints: {
               filename: /.+/,
           }

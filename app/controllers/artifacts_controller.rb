@@ -3,7 +3,6 @@ class ArtifactsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i(publish)
 
   def index
-    @artifacts = ArtifactList.new
   end
 
   def show

@@ -20,6 +20,11 @@ gem 'therubyracer', '~> 0.12.1'
 gem 'jquery-rails', '~> 3.1.1'
 gem 'html5shiv-rails'
 
+#group :production do # for Heroku
+#  gem 'rails_12factor'
+#  gem 'pg'
+#end
+
 group :development do
   gem 'shotgun'
 
