@@ -18,7 +18,7 @@
   h2 To deploy libraries
   pre
     | uploadArchives.repositories.mavenDeployer {
-          repository(url: 'https://internal-maven.cookpad.com/artifacts')
+          repository url: '#{site_maven_repository_url}'
 
           pom.groupId = GROUP_ID
           pom.artifactId = ARTIFACT_ID
