@@ -3,6 +3,10 @@ class ArtifactsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i(publish)
 
   def index
+    unless request.original_fullpath.end_with?('/')
+      return redirect_to "#{request.original_fullpath}/"
+    end
+
     @files = files(Rails.application.config.artifact_root_path)
   end
 
@@ -12,6 +16,7 @@ class ArtifactsController < ApplicationController
       unless request.original_fullpath.end_with?('/')
         return redirect_to "#{request.original_fullpath}/"
       end
+
       @files = files(path)
       render :index
     else
