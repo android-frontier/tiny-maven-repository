@@ -1,16 +1,26 @@
 .row
-  h1 List of Artifacts
 
-  pre
-    | repositories {
-        maven { url '#{site_maven_repository_url}' }
-      }
-
-
+  h2 List of libraries
   pre
     = "dependencies {\n"
     - @artifacts.each do |artifact|
-        |   compile '
+        |     compile '
         = link_to artifact.as_dependency, '/artifacts/' + artifact.path
         | ' } // updated #{time_ago_in_words(artifact.updated_at)} ago#{"\n"}
     = "}\n"
+
+  h2 To use libraries
+  pre
+    | repositories {
+          maven { url '#{site_maven_repository_url}' }
+      }
+
+  h2 To deploy libraries
+  pre
+    | uploadArchives.repositories.mavenDeployer {
+          repository(url: 'https://internal-maven.cookpad.com/artifacts')
+
+          pom.groupId = GROUP_ID
+          pom.artifactId = ARTIFACT_ID
+          pom.version = VERSION
+      }
