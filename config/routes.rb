@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   # see http://docs.codehaus.org/display/MAVEN/Repository+Layout+-+Final
   # /$groupId[0]/../${groupId[n]/$artifactId/$version/$artifactId-$version.$extension
-  resources :artifacts do # artifact upload API
+  resources :artifacts do
     collection do
       put '/*artifact_path', to: 'artifacts#publish',
           constraints: {
