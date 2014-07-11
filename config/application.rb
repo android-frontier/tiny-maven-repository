@@ -20,5 +20,7 @@ module TinyMavenRepository
       config.artifact_root_path = Rails.root.join('tmp', 'artifacts')
       config.artifact_root_path.mkpath
     end
+
+    config.time_zone = 'Tokyo'
   end
 end
