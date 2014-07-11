@@ -40,7 +40,7 @@ class ArtifactsController < ApplicationController
   private
 
   def files(dir)
-    Dir.foreach(dir).find_all do |item|
+    Dir.foreach(dir).sort.find_all do |item|
       !item.start_with?('.')
     end
   end
