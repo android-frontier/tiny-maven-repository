@@ -5,7 +5,7 @@ class ArtifactList
     @root_path = root_path
 
     @artifacts = []
-    Dir.glob("#{root_path}/**/maven-metadata.xml").each do |xml|
+    Dir.glob("#{root_path}/**/maven-metadata.xml").sort.each do |xml|
       metadata = File.read(xml)
       @artifacts.push(Artifact.new(metadata))
     end
