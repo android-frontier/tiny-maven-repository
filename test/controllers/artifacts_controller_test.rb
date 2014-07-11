@@ -8,22 +8,22 @@ class ArtifactsControllerTest < ActionController::TestCase
     assert { response.response_code == 200 }
   end
 
-  test 'GET /artifacts/:artifact_path/:filename' do
+  test 'GET /artifacts/:artifact_path' do
     FileUtils.mkdir_p(root.join('com/example'))
     File.write(root.join('com/example/artifact.txt'), 'Hello, world!')
 
-    get :show, artifact_path: 'com/example', filename: 'artifact.txt'
+    get :show, artifact_path: 'com/example/artifact.txt'
     assert { response.response_code == 200 }
     assert { response.body == 'Hello, world!' }
   end
 
-  test 'GET /artifacts/:artifact_path/:filename (not found)' do
-    get :show, artifact_path: 'com/example/not/found', filename: 'artifact.txt'
+  test 'GET /artifacts/:artifact_path (not found)' do
+    get :show, artifact_path: 'com/example/not/found/artifact.txt'
     assert { response.response_code == 404 }
   end
 
-  test 'PUT /artifacts/:artifact_path/:filename' do
-    put :publish, { artifact_path: 'com/example', filename: 'artifact.txt' }
+  test 'PUT /artifacts/:artifact_path' do
+    put :publish, { artifact_path: 'com/example/artifact.txt' }
 
     assert { response.response_code == 200 }
   end

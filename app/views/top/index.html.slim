@@ -10,5 +10,7 @@
   pre
     = "dependencies {\n"
     - @artifacts.each do |artifact|
-        = "  compile '#{artifact.as_dependency}'\n"
+        |   compile '
+        = link_to artifact.as_dependency, '/artifacts/' + artifact.path
+        | ' } // updated #{time_ago_in_words(artifact.updated_at)} ago#{"\n"}
     = "}\n"

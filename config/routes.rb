@@ -9,20 +9,9 @@ Rails.application.routes.draw do
   # /$groupId[0]/../${groupId[n]/$artifactId/$version/$artifactId-$version.$extension
   resources :artifacts do # artifact upload API
     collection do
-      put '/*artifact_path/:filename', to: 'artifacts#publish',
-          constraints: {
-              filename: /.+/,
-          }
+      put '/*artifact_path', to: 'artifacts#publish'
 
-      get '/*artifact_path/', to: 'artifacts#index',
-          constraints: {
-              filename: /.+/,
-          }
-
-      get '/*artifact_path/:filename', to: 'artifacts#show',
-          constraints: {
-              filename: /.+/,
-          }
+      get '/*artifact_path', to: 'artifacts#show'
     end
   end
 end

@@ -7,6 +7,7 @@ class ArtifactTest < ActiveSupport::TestCase
     assert { artifact.group_id == 'com.github.gfx.util' }
     assert { artifact.artifact_id == 'weak-identity-hash-map' }
     assert { artifact.version == '2.0.1' }
+    assert { artifact.updated_at == Time.parse('2014-07-07 23:20:56') }
     assert { artifact.as_dependency == 'com.github.gfx.util:weak-identity-hash-map:2.0.1' }
   end
 end
