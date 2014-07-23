@@ -4,7 +4,8 @@ This is a tiny maven repository server to serve artifacts uploader/downloader.
 
 ## Settings
 
-* [config/secrets.yml](config/secrets.yml)
+1. cp [config/secrets.yml.sample](config/secrets.yml.sample) config/secrets.yml
+2. edit config/secrets.yml
 
 ## Author
 
