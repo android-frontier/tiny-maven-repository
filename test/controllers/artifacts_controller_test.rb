@@ -4,6 +4,8 @@ class ArtifactsControllerTest < ActionController::TestCase
   root = Rails.application.config.artifact_root_path
 
   test 'GET /' do
+    FileUtils.mkdir_p(root)
+
     get :index, trailing_slash: true
     assert { response.response_code == 200 }
   end
