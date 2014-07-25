@@ -1,4 +1,4 @@
-# Tiny Maven Repository
+# Tiny Maven Repository [![Build Status](https://travis-ci.org/android-frontier/tiny-maven-repository.svg?branch=master)](https://travis-ci.org/android-frontier/tiny-maven-repository)
 
 This is a tiny maven repository server to serve artifacts uploader/downloader.
 
