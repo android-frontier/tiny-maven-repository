@@ -17,8 +17,21 @@ class ArtifactsControllerTest < ActionController::TestCase
     assert { response.body == 'Hello, world!' }
   end
 
+  test 'HEAD /artifacts/:artifact_path' do
+    FileUtils.mkdir_p(root.join('com/example'))
+    File.write(root.join('com/example/artifact.txt'), 'Hello, world!')
+
+    head :show, artifact_path: 'com/example/artifact.txt'
+    assert { response.response_code == 200 }
+  end
+
   test 'GET /artifacts/:artifact_path (not found)' do
     get :show, artifact_path: 'com/example/not/found/artifact.txt'
+    assert { response.response_code == 404 }
+  end
+
+  test 'HEAD /artifacts/:artifact_path (not found)' do
+    head :show, artifact_path: 'com/example/not/found/artifact.txt'
     assert { response.response_code == 404 }
   end
 

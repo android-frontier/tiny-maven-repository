@@ -11,6 +11,16 @@ class ArtifactsController < ApplicationController
   end
 
   def show
+    if request.head?
+      status = if artifact_path.exist?
+                 200
+               else
+                 404
+               end
+      head status, connection: 'close'
+      return
+    end
+
     path = artifact_path
     if path.try(:directory?)
       unless request.original_fullpath.end_with?('/')

@@ -18,7 +18,6 @@ Rails.application.routes.draw do
           constraints: {
               artifact_path: /.+/,
           }
-
     end
   end
 end
