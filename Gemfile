@@ -32,8 +32,6 @@ group :development do
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'sqlite3'
-
-  gem 'spring'
 end
 
 group :doc do
@@ -42,6 +40,7 @@ end
 
 group :test do
   gem 'minitest-power_assert'
+  gem 'simplecov'
 end
 
 # Use unicorn as the app server
