@@ -17,7 +17,34 @@
 
   h2 To deploy libraries
   pre
-    | uploadArchives.repositories.mavenDeployer {
+    | android.libraryVariants.all { variant ->
+          if (variant.name == 'release') {
+              task(javadoc, type: Javadoc) {
+                  exclude "**/R.java"
+                  options.encoding 'UTF-8'
+
+                  source variant.javaCompile.source
+                  def androidJars = plugins.
+                          findPlugin(com.android.build.gradle.LibraryPlugin).bootClasspath
+                  classpath += files(variant.javaCompile.classpath) + files(androidJars)
+              }
+              task(javadocJar, type: Jar, dependsOn: javadoc) {
+                  classifier 'javadoc'
+                  from javadoc.destinationDir
+              }
+
+              task(sourcesJar, type: Jar) {
+                  classifier 'sources'
+                  from android.sourceSets.main.java.sourceFiles
+              }
+
+              artifacts {
+                  archives javadocJar
+                  archives sourcesJar
+              }
+          }
+      }
+      uploadArchives.repositories.mavenDeployer {
           repository url: '#{site_maven_repository_url}'
 
           pom.groupId = GROUP_ID
