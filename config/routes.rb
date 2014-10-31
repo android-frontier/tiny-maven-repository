@@ -18,6 +18,13 @@ Rails.application.routes.draw do
           constraints: {
               artifact_path: /.+/,
           }
+
+
+      delete '/*artifact_path', to: 'artifacts#delete',
+        constraints: {
+          artifact_path: /.+/,
+        }
+
     end
   end
 end

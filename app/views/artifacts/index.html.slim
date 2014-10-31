@@ -1,4 +1,6 @@
-ul
+ul.artifacts
   - @files.each do |item|
     li
-      a href="#{item}" #{item}
+      a.artifact href="#{item}" #{item}
+      - unless /^maven-metadata\.xml/ =~ item
+        = link_to "delete", item, class: 'delete', method: :delete, data: { artifact_version: item }

@@ -47,6 +47,13 @@ class ArtifactsController < ApplicationController
     render text: 'Bad Request', status: 400
   end
 
+  def delete
+    path = artifact_path
+    # delete the artifact here
+
+    redirect_to root_path, status: :ok, notice: 'artifact deleted'
+  end
+
   private
 
   def files(dir)
