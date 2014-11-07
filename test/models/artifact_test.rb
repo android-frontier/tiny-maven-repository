@@ -10,4 +10,13 @@ class ArtifactTest < ActiveSupport::TestCase
     assert { artifact.updated_at == Time.parse('2014-07-07 23:20:56') }
     assert { artifact.as_dependency == 'com.github.gfx.util:weak-identity-hash-map:2.0.1' }
   end
+
+  test "remove_version" do
+    metadata = File.read('test/fixtures/maven-metadata.xml')
+    artifact = Artifact.new(metadata)
+
+    artifact.remove_version("2.0.1")
+
+    assert { artifact.version == "1.0.0" }
+  end
 end

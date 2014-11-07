@@ -42,16 +42,26 @@ class ArtifactsController < ApplicationController
       IO.copy_stream(request.body_stream, outs)
     end
 
-    redirect_to root_path, status: :ok, notice: 'artifact published'
+    redirect_to root_path, notice: 'artifact published'
   rescue
     render text: 'Bad Request', status: 400
   end
 
   def delete
     path = artifact_path
-    # delete the artifact here
 
-    redirect_to root_path, status: :ok, notice: 'artifact deleted'
+    # remove it from metadata first
+    version = path.parent.basename
+    unless /\d/ =~ "#{version}"
+      return render text: 'Bad Request', status: 400
+    end
+
+
+
+    # then actually remove it
+    #FileUtils.rmtree(path)
+
+    redirect_to root_path, notice: 'artifact deleted'
   end
 
   private

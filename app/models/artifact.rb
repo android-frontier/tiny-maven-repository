@@ -25,8 +25,18 @@ class Artifact
     Time.strptime(@metadata.css('metadata versioning lastUpdated').first.text, '%Y%m%d%H%M%S')
   end
 
+  # @return [String]
   def path
     group_id.gsub(/\./, '/') + '/' + artifact_id + '/'
+  end
+
+  def remove_version(version)
+    @metadata.css("versions version:contains('#{version}')").remove
+  end
+
+  # @return [String]
+  def to_xml
+    @metadata.to_s
   end
 
   # @return [String]
