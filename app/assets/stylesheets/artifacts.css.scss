@@ -1,3 +1,12 @@
-// Place all the styles related to the artifacts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.artifacts {
+  .artifact {
+    display: inline-flex;
+    width: 400px;
+  }
+
+  .delete {
+    display: inline-flex;
+    width: 100px;
+  }
+}
