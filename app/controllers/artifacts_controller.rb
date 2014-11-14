@@ -42,21 +42,22 @@ class ArtifactsController < ApplicationController
       IO.copy_stream(request.body_stream, outs)
     end
 
-    redirect_to root_path, notice: 'artifact published'
+    render nothing: true, status: 204
   rescue
     render text: 'Bad Request', status: 400
   end
 
   def delete
     path = artifact_path
+    # path is something like "/path/to/com/cookpad/android/pantryman/1.0.0"
 
     # remove it from metadata first
-    version = path.parent.basename.to_s
+    version = path.basename.to_s
     unless /\d/ =~ version
-      return render text: 'Bad Request', status: 400
+      return render text: "Bad Request: #{path}", status: 400
     end
 
-    artifacts_dir = path.parent.parent
+    artifacts_dir = path.parent
 
     metadata_file = artifacts_dir.join('maven-metadata.xml')
     artifact = Artifact.new(File.read(metadata_file))
@@ -65,7 +66,7 @@ class ArtifactsController < ApplicationController
       FileUtils.rmtree(artifacts_dir)
     else
       File.write(metadata_file, artifact.to_xml)
-      FileUtils.rmtree(path.parent)
+      FileUtils.rmtree(path)
     end
 
     redirect_to root_path, notice: 'artifact deleted'

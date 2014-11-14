@@ -53,7 +53,7 @@ class ArtifactsControllerTest < ActionController::TestCase
   test 'PUT /artifacts/:artifact_path' do
     put :publish, { artifact_path: file }
 
-    assert { response.response_code == 302 }
+    assert { response.response_code == 204 }
   end
 
   test 'DELETE /artifact/:artifact_path (one)' do
