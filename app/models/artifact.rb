@@ -20,6 +20,11 @@ class Artifact
     @metadata.css('metadata versioning versions version').last.text
   end
 
+  # @return [Boolean]
+  def empty?
+    @metadata.css('metadata versioning versions version').empty?
+  end
+
   # @return [Time]
   def updated_at
     Time.strptime(@metadata.css('metadata versioning lastUpdated').first.text, '%Y%m%d%H%M%S')

@@ -3,13 +3,20 @@ require 'test_helper'
 class ArtifactsControllerTest < ActionController::TestCase
   root = Rails.application.config.artifact_root_path
   dir = 'com/example/1.0.0'
-  file = 'com/example/1.0.0/artifact.txt'
-  non_existing_file = 'com/example/non_existing_artifact.txt'
+  dir2 = 'com/example/2.0.1'
+
+  file = "#{dir}/artifact.txt"
+  file2 = "#{dir2}/artifact.txt"
+
+  non_existing_file = "#{dir}/non_existing_artifact.txt"
   metadata_file = 'com/example/maven-metadata.xml'
 
   setup do
     FileUtils.mkdir_p(root.join(dir))
+    FileUtils.mkdir_p(root.join(dir2))
+
     File.write(root.join(file), 'Hello, world!')
+    File.write(root.join(file2), 'Hello, world!')
     FileUtils.copy_file('test/fixtures/maven-metadata.xml', root.join(metadata_file))
   end
 
@@ -49,11 +56,25 @@ class ArtifactsControllerTest < ActionController::TestCase
     assert { response.response_code == 302 }
   end
 
-  test 'DELETE /artifact/:artifact_path' do
+  test 'DELETE /artifact/:artifact_path (one)' do
+    delete :delete, { artifact_path: file2 }
+
+    assert { response.response_code == 302 }
+
+    assert {  File.exist?(root.join(file)) }
+    assert { !File.exist?(root.join(file2)) }
+    assert { Artifact.new(File.read(root.join(metadata_file))).version == "1.0.0"}
+  end
+
+  test 'DELETE /artifact/:artifact_path (all)' do
     delete :delete, { artifact_path: file }
+    delete :delete, { artifact_path: file2 }
 
     assert { response.response_code == 302 }
 
     assert { !File.exist?(root.join(file)) }
+    assert { !File.exist?(root.join(file2)) }
+    assert { !File.exist?(root.join(metadata_file)) }
   end
+
 end

@@ -51,15 +51,22 @@ class ArtifactsController < ApplicationController
     path = artifact_path
 
     # remove it from metadata first
-    version = path.parent.basename
-    unless /\d/ =~ "#{version}"
+    version = path.parent.basename.to_s
+    unless /\d/ =~ version
       return render text: 'Bad Request', status: 400
     end
 
+    artifacts_dir = path.parent.parent
 
-
-    # then actually remove it
-    #FileUtils.rmtree(path)
+    metadata_file = artifacts_dir.join('maven-metadata.xml')
+    artifact = Artifact.new(File.read(metadata_file))
+    artifact.remove_version(version)
+    if artifact.empty?
+      FileUtils.rmtree(artifacts_dir)
+    else
+      File.write(metadata_file, artifact.to_xml)
+      FileUtils.rmtree(path.parent)
+    end
 
     redirect_to root_path, notice: 'artifact deleted'
   end
