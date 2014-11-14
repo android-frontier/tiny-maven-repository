@@ -57,7 +57,7 @@ class ArtifactsControllerTest < ActionController::TestCase
   end
 
   test 'DELETE /artifact/:artifact_path (one)' do
-    delete :delete, { artifact_path: file2 }
+    delete :delete, { artifact_path: dir2 }
 
     assert { response.response_code == 302 }
 
@@ -67,8 +67,8 @@ class ArtifactsControllerTest < ActionController::TestCase
   end
 
   test 'DELETE /artifact/:artifact_path (all)' do
-    delete :delete, { artifact_path: file }
-    delete :delete, { artifact_path: file2 }
+    delete :delete, { artifact_path: dir }
+    delete :delete, { artifact_path: dir2 }
 
     assert { response.response_code == 302 }
 

@@ -48,6 +48,7 @@ class ArtifactsController < ApplicationController
   end
 
   def delete
+    # TODO: too much logic in controllers!
     path = artifact_path
     # path is something like "/path/to/com/cookpad/android/pantryman/1.0.0"
 
@@ -65,7 +66,8 @@ class ArtifactsController < ApplicationController
     if artifact.empty?
       FileUtils.rmtree(artifacts_dir)
     else
-      File.write(metadata_file, artifact.to_xml)
+      artifact.save(metadata_file)
+
       FileUtils.rmtree(path)
     end
 
