@@ -9,7 +9,7 @@ gem 'nokogiri', '~> 1.6.2.1'
 gem 'jbuilder', '~> 2.1.2'
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'rails', '~> 4.1.4'
+gem 'rails', '~> 4.1.8'
 gem 'sass-rails', '~> 4.0.3'
 gem 'less-rails', '~> 2.5.0'
 gem 'uglifier', '~> 2.5.1'
@@ -45,12 +45,12 @@ group :test do
   gem 'simplecov'
 end
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :cap do
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+end
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
+group :mysql do
+  gem 'mysql2'
+end

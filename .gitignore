@@ -20,3 +20,5 @@ coverage/
 .ruby-version
 
 secrets.yml
+
+public/assets/
