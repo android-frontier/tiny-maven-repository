@@ -46,7 +46,7 @@ group :test do
 end
 
 group :cap do
-  gem 'capistrano'
+  gem 'capistrano', '~> 3.3.5'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
 end

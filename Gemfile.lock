@@ -208,7 +208,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
-  capistrano
+  capistrano (~> 3.3.5)
   capistrano-bundler
   capistrano-rails
   execjs (~> 2.2.1)
