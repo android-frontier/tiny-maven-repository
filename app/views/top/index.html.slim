@@ -6,7 +6,9 @@
     - @artifacts.each do |artifact|
         |     compile '
         = link_to artifact.as_dependency, '/artifacts/' + artifact.path
-        | ' // updated #{time_ago_in_words(artifact.updated_at)} ago#{"\n"}
+        = ' // updated '
+        = timeago_tag artifact.updated_at, limit: 1.year.ago
+        = "\n"
     = "}\n"
 
   h2 To use libraries

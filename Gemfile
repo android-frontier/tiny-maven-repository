@@ -17,7 +17,9 @@ gem 'uglifier', '~> 2.5.1'
 gem 'twitter-bootstrap-rails', '~> 2.2.8'
 gem 'execjs', '~> 2.2.1'
 gem 'therubyracer', '~> 0.12.1'
+
 gem 'jquery-rails', '~> 3.1.1'
+gem 'rails-timeago', '~> 2.11'
 gem 'html5shiv-rails'
 
 #group :production do # for Heroku
