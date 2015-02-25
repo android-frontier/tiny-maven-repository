@@ -26,8 +26,7 @@
                   options.encoding 'UTF-8'
 
                   source variant.javaCompile.source
-                  def androidJars = plugins.
-                          findPlugin(com.android.build.gradle.LibraryPlugin).bootClasspath
+                  def androidJars = android.bootClasspath
                   classpath += files(variant.javaCompile.classpath) + files(androidJars)
               }
               task(javadocJar, type: Jar, dependsOn: javadoc) {
