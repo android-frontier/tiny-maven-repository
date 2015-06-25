@@ -2,16 +2,16 @@ source 'https://rubygems.org'
 
 gem 'unicorn'
 
-gem 'slim-rails', '~> 2.1.5'
+gem 'slim-rails', '~> 3.0.1'
 gem 'omniauth', '~> 1.2.1'
 gem 'omniauth-github', '~> 1.1.2'
 gem 'nokogiri', '~> 1.6.2.1'
 gem 'jbuilder', '~> 2.1.2'
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'rails', '~> 4.1.8'
+gem 'rails', '~> 4.2.0'
 gem 'sass-rails', '~> 4.0.3'
-gem 'less-rails', '~> 2.5.0'
+gem 'less-rails', '~> 2.7.0'
 gem 'uglifier', '~> 2.5.1'
 
 gem 'twitter-bootstrap-rails', '~> 2.2.8'
