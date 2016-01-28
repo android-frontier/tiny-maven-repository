@@ -48,11 +48,11 @@ class Artifact
     @metadata.to_s
   end
 
-  def save(metadata_file)
+  def save(s3_storage, metadata_file)
     xml = to_xml
-    File.write(metadata_file, xml)
-    File.write("#{metadata_file}.md5", Digest::MD5.hexdigest(xml))
-    File.write("#{metadata_file}.sha1", Digest::SHA1.hexdigest(xml))
+    s3_storage.put_object(metadata_file, StringIO.new(xml))
+    s3_storage.put_object("#{metadata_file}.md5", StringIO.new(Digest::MD5.hexdigest(xml)))
+    s3_storage.put_object("#{metadata_file}.sha1", StringIO.new(Digest::SHA1.hexdigest(xml)))
   end
 
   # @return [String]
