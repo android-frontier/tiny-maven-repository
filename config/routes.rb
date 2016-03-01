@@ -27,4 +27,9 @@ Rails.application.routes.draw do
 
     end
   end
+
+
+  # sessions
+  get "/auth/:provider/callback" => "sessions#create"
+  get "/signout" => "sessions#destroy", :as => :signout
 end

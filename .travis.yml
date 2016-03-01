@@ -3,3 +3,5 @@ rvm:
     - 2.1.1
 before_install:
     - cp config/secrets.yml.sample config/secrets.yml
+before_script:
+    - bin/rake db:migrate RAILS_ENV=test
