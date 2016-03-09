@@ -12,7 +12,7 @@ class ArtifactsController < ApplicationController
 
   def show
     if request.head?
-      status = if artifact_path.exist?
+      status = if s3_storage.exist?(artifact_path)
                  200
                else
                  404
@@ -22,29 +22,26 @@ class ArtifactsController < ApplicationController
     end
 
     path = artifact_path
-    if path.try(:directory?)
-      unless request.original_fullpath.end_with?('/')
-        return redirect_to "#{request.original_fullpath}/"
-      end
-
+    begin
+      send_data s3_storage.get_object(path)
+    rescue Aws::S3::Errors::NoSuchKey
       @files = files(path)
-      render :index
-    else
-      send_file(path)
+      if @files.empty?
+        render text: "File Not Found\n", status: 404
+      else
+        unless request.original_fullpath.end_with?('/')
+          return redirect_to "#{request.original_fullpath}/"
+        end
+        render :index
+      end
     end
-  rescue ActionController::MissingFile
-    render text: "File Not Found\n", status: 404
   end
 
   def publish
     path = artifact_path
-    open_for_writing(path) do |outs|
-      IO.copy_stream(request.body_stream, outs)
-    end
+    s3_storage.put_object(artifact_path, request.body_stream)
 
     render nothing: true, status: 204
-  rescue
-    render text: 'Bad Request', status: 400
   end
 
   def delete
@@ -53,22 +50,22 @@ class ArtifactsController < ApplicationController
     # path is something like "/path/to/com/cookpad/android/pantryman/1.0.0"
 
     # remove it from metadata first
-    version = path.basename.to_s
+    version = File.basename(path)
     unless /\d/ =~ version
       return render text: "Bad Request: #{path}", status: 400
     end
 
-    artifacts_dir = path.parent
+    artifacts_dir = File.dirname(path)
 
-    metadata_file = artifacts_dir.join('maven-metadata.xml')
-    artifact = Artifact.new(File.read(metadata_file))
+    metadata_file = File.join(artifacts_dir, 'maven-metadata.xml')
+    artifact = Artifact.new(s3_storage.get_object(metadata_file))
     artifact.remove_version(version)
     if artifact.empty?
-      FileUtils.rmtree(artifacts_dir)
+      s3_storage.rmtree(artifacts_dir)
     else
-      artifact.save(metadata_file)
+      artifact.save(s3_storage, metadata_file)
 
-      FileUtils.rmtree(path)
+      s3_storage.rmtree(path)
     end
 
     redirect_to root_path, notice: 'artifact deleted'
@@ -77,20 +74,13 @@ class ArtifactsController < ApplicationController
   private
 
   def files(dir)
-    Dir.foreach(dir).sort.find_all do |item|
-      !item.start_with?('.')
-    end
+    s3_storage.list_artifacts(dir.to_s)
   end
 
   # @return [Pathname]
   def artifact_path
     root = Rails.application.config.artifact_root_path
     path = root.join(params.require(:artifact_path))
-    path.cleanpath.to_s.start_with?(root.to_s + "/") ? path : nil
-  end
-
-  def open_for_writing(path, &block)
-    FileUtils.mkdir_p(path.dirname)
-    File.open(path, "wb", &block)
+    path.cleanpath.to_s.start_with?(root.to_s + "/") ? path.to_s : nil
   end
 end
