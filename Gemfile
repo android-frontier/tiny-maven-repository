@@ -23,7 +23,7 @@ gem 'jquery-rails', '~> 3.1.1'
 gem 'rails-timeago', '~> 2.11'
 gem 'html5shiv-rails'
 
-gem 'aws-sdk', '>= 2.0.0'
+gem 'aws-sdk', '>= 2.3.22'
 
 #group :production do # for Heroku
 #  gem 'rails_12factor'
