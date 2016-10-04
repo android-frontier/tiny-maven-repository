@@ -10,6 +10,4 @@ require 'minitest/mock'
 
 class ActiveSupport::TestCase
   include Minitest::PowerAssert::Assertions
-
-  fixtures :all
 end

@@ -36,7 +36,6 @@ group :development do
   gem 'pry'
   gem 'pry-doc'
   gem 'pry-rails'
-  gem 'sqlite3'
 end
 
 group :doc do
@@ -52,8 +51,4 @@ group :cap do
   gem 'capistrano', '~> 3.3.5'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-end
-
-group :mysql do
-  gem 'mysql2'
 end
