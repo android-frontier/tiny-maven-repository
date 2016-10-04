@@ -8,6 +8,7 @@ gem 'omniauth-github', '~> 1.1.2'
 gem 'nokogiri', '~> 1.6.2.1'
 gem 'jbuilder', '~> 2.1.2'
 gem 'bcrypt', '~> 3.1.7'
+gem 'revision_plate', '~> 0.1.2', require: 'revision_plate/rails'
 
 gem 'rails', '~> 4.2.0'
 gem 'sass-rails', '~> 4.0.3'
