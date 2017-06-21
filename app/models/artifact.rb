@@ -21,12 +21,17 @@ class Artifact
 
   # @return [String]
   def version
-    @metadata.css('metadata versioning versions version').last.text
+    version = @metadata.css('metadata versioning versions version,snapshot').last
+    if version.name == 'snapshot'
+      'SNAPSHOT'
+    else
+      version.text
+    end
   end
 
   # @return [Boolean]
   def empty?
-    @metadata.css('metadata versioning versions version').empty?
+    @metadata.css('metadata versioning versions version,snapshot').empty?
   end
 
   # @return [Time]

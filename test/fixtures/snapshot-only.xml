@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.github.gfx.util</groupId>
+  <artifactId>weak-identity-hash-map</artifactId>
+  <version>SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20170510.083637</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20170510083637</lastUpdated>
+  </versioning>
+</metadata>
